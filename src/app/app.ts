@@ -13,4 +13,15 @@ export class App {
   medications: Medication[] = [];
 
   constructor(private pharmacyService: PharmacyService) { }
+
+  ngOnInit(): void {
+    this.pharmacyService.getMedications().subscribe({
+      next: (data) => {
+        this.medications = data;
+      },
+      error: (err) => {
+        console.error('Błąd podczas pobierania leków:', err);
+      }
+    });
+  }
 }
